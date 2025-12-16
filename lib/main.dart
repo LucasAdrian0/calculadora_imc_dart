@@ -1,15 +1,31 @@
-import 'package:flutter/material.dart';
+import 'package:calculadora_imc_dart/classes/pessoa.dart';
+import 'package:calculadora_imc_dart/models/console_utils.dart';
 
-class MyApp extends StatefulWidget {
-  const MyApp({super.key});
+void execute() {
+  print("Calculadora IMC");
 
-  @override
-  State<MyApp> createState() => _MyAppState();
-}
-
-class _MyAppState extends State<MyApp> {
-  @override
-  Widget build(BuildContext context) {
-    return const Placeholder();
+  String nome = ConsoleUtils.lerStringComTexto("Digite seu nome: ");
+  try {
+    if (nome.trim() == "") {
+      throw Exception("Nome Invalido");
+    }
+    // ignore: non_constant_identifier_names
+  } catch (e) {
+    nome = "Nome Padrão";
+    print(e);
   }
+
+  var peso = ConsoleUtils.lerDouble("Digite seu peso: ");
+
+  var altura = ConsoleUtils.lerDouble("Digite sua altura: ");
+
+  if (peso == null || altura == null) {
+    print("Entrada inválida para peso ou altura.");
+    return;
+  }
+
+  var pessoa = Pessoa(nome, peso, altura);
+  pessoa.imc = pessoa.calcularIMC(peso, altura);
+
+  print("IMC: ${pessoa.imc}");
 }
