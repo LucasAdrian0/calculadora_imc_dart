@@ -12,6 +12,7 @@ class ConsoleUtils {
   }
 
   static double? lerDouble(String s) {
+    stdout.write(texto); //parei aqui
     var value = lerString();
     try {
       return double.parse(value);
